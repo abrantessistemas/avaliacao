@@ -84,14 +84,17 @@ export class UsersComponent {
   }
 
   updateUser(user: UserModel) {
-    this.dialog
-      .open(UsersCreateUpdateComponent, {
-        data: user,
-      })
-      .afterClosed()
-      .subscribe((user) => {
-        if (user) this.findAllUsers(this.pageIndex, this.limit);
-      });
+    this.userService.findById(user.id).subscribe(userById => {
+      this.dialog
+        .open(UsersCreateUpdateComponent, {
+          data: userById,
+        })
+        .afterClosed()
+        .subscribe((user) => {
+          if (user) this.findAllUsers(this.pageIndex, this.limit);
+        });
+
+    });
   }
 
   deleteUser(user: UserModel) {
