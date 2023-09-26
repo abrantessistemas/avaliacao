@@ -71,7 +71,7 @@ export class UsersCreateUpdateComponent {
         (result) => {
           this.snackbar.open(
             'User ' +
-            result +
+            result.firstName +
             ' successfully created.',
             'OK',
             {
@@ -99,7 +99,7 @@ export class UsersCreateUpdateComponent {
         (result) => {
           this.snackbar.open(
             'User ' +
-            result +
+            result.firstName +
             ' updated successfully.',
             'OK',
             {
