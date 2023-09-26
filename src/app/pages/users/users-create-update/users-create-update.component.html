@@ -21,73 +21,104 @@
     </div>
   </div>
 
-  <mat-dialog-content class="dialog-container">
-    <mat-form-field *ngIf="pictureChange" style="width: 100%;">
-      <mat-label>Picture url</mat-label>
-      <input cdkFocusInitial formControlName="picture" matInput>
-    </mat-form-field>
+  <mat-tab-group [disableRipple]="false">
+    <mat-tab label="Description">
+      <mat-dialog-content class="dialog-container">
+        <mat-form-field *ngIf="pictureChange" style="width: 100%;">
+          <mat-label>Picture url</mat-label>
+          <input cdkFocusInitial formControlName="picture" matInput>
+        </mat-form-field>
 
-    <div class="input-fields">
-      <mat-form-field style="width: 100%;">
-        <mat-label>Title</mat-label>
-        <mat-select formControlName="title">
-          <mat-option value=""></mat-option>
-          <mat-option *ngFor="let title of listTitle" [value]="title">{{title}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <div class="input-fields">
+          <mat-form-field style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <mat-select formControlName="title">
+              <mat-option value=""></mat-option>
+              <mat-option *ngFor="let title of listTitle" [value]="title">{{title}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 
-      <mat-form-field style="margin-left: 8px; width: 100%;">
-        <mat-label>dateOfBirth</mat-label>
-        <input formControlName="dateOfBirth" [matDatepicker]="dateOfBirth" (click)="dateOfBirth.open()"
-          (focus)="dateOfBirth.open()" matInput required readonly>
-        <mat-datepicker-toggle [for]="dateOfBirth" matSuffix></mat-datepicker-toggle>
-        <mat-datepicker #dateOfBirth></mat-datepicker>
-      </mat-form-field>
-    </div>
+          <mat-form-field style="margin-left: 8px; width: 100%;">
+            <mat-label>dateOfBirth</mat-label>
+            <input formControlName="dateOfBirth" [matDatepicker]="dateOfBirth" (click)="dateOfBirth.open()"
+              (focus)="dateOfBirth.open()" matInput required readonly>
+            <mat-datepicker-toggle [for]="dateOfBirth" matSuffix></mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirth></mat-datepicker>
+          </mat-form-field>
+        </div>
 
-    <div class="input-fields">
-      <mat-form-field>
-        <mat-label>First Name</mat-label>
-        <input cdkFocusInitial formControlName="firstName" matInput required>
-        <mat-error *ngIf="!userForm.get('firstName')?.valid">
-          * Preenchimento obrigatório.
-        </mat-error>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
+        <div class="input-fields">
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input cdkFocusInitial formControlName="firstName" matInput required>
+            <mat-error *ngIf="!userForm.get('firstName')?.valid">
+              * Preenchimento obrigatório.
+            </mat-error>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
 
-      <mat-form-field style="margin-left: 8px;">
-        <mat-label>Last Name</mat-label>
-        <input formControlName="lastName" matInput required>
-        <mat-error *ngIf="!userForm.get('lastName')?.valid">
-          * Preenchimento obrigatório.
-        </mat-error>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </div>
+          <mat-form-field style="margin-left: 8px;">
+            <mat-label>Last Name</mat-label>
+            <input formControlName="lastName" matInput required>
+            <mat-error *ngIf="!userForm.get('lastName')?.valid">
+              * Preenchimento obrigatório.
+            </mat-error>
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+          </mat-form-field>
+        </div>
 
-    <mat-form-field style="width: 100%;">
-      <mat-label>Gender</mat-label>
-      <mat-select formControlName="gender">
-        <mat-option value=""></mat-option>
-        <mat-option *ngFor="let gender of listGender" [value]="gender">{{gender}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value=""></mat-option>
+            <mat-option *ngFor="let gender of listGender" [value]="gender">{{gender}}</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <mat-form-field style="width: 100%;">
-      <mat-label>Email</mat-label>
-      <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
-      <mat-error *ngIf="userForm.hasError('email')">
-        Please enter a valid email address
-      </mat-error>
-    </mat-form-field>
+        <mat-form-field style="width: 100%;">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+          <mat-error *ngIf="userForm.hasError('email')">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
 
-    <div>
-      <mat-form-field>
-        <mat-label>phone</mat-label>
-        <input formControlName="phone" matInput>
-      </mat-form-field>
-    </div>
-  </mat-dialog-content>
+        <div>
+          <mat-form-field>
+            <mat-label>phone</mat-label>
+            <input formControlName="phone" matInput>
+          </mat-form-field>
+        </div>
+      </mat-dialog-content>
+    </mat-tab>
+
+    <mat-tab label="Address">
+      <mat-dialog-content class="dialog-container" formGroupName="location">
+        <mat-form-field style="width: 100%;">
+          <mat-label>Street</mat-label>
+          <input formControlName="street" matInput>
+        </mat-form-field>
+
+        <div class="input-fields">
+          <mat-form-field>
+            <mat-label>City</mat-label>
+            <input formControlName="city" matInput>
+          </mat-form-field>
+
+          <mat-form-field style="margin-left: 8px;">
+            <mat-label>State</mat-label>
+            <input formControlName="state" matInput>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field style="width: 100%;">
+          <mat-label>Country</mat-label>
+          <input formControlName="country" matInput>
+        </mat-form-field>
+      </mat-dialog-content>
+    </mat-tab>
+  </mat-tab-group>
+
   <mat-dialog-actions align="end">
     <button *ngIf="isCreateMode()" [disabled]="!userForm.valid" color="primary" mat-raised-button type="submit"
       matTooltip="Create new User">
@@ -98,7 +129,8 @@
       <mat-icon>edit</mat-icon>
       Update
     </button>
-    <button type="button" *ngIf="isUpdateMode()" (click)="deleteUser()" color="primary" mat-raised-button matTooltip="Delete">
+    <button type="button" *ngIf="isUpdateMode()" (click)="deleteUser()" color="primary" mat-raised-button
+      matTooltip="Delete">
       <mat-icon>delete</mat-icon>
       Delete
     </button>

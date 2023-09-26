@@ -43,7 +43,13 @@ export class UsersCreateUpdateComponent {
       registerDate: this.defaults.registerDate || '',
       phone: this.defaults.phone || '',
       picture: this.defaults.picture || '',
-      location: this.defaults.location
+      location: this.fb.group({
+        street: [this.defaults.location?.street || ''],
+        city: [this.defaults.location?.city || ''],
+        state: [this.defaults.location?.state || ''],
+        country: [this.defaults.location?.country || ''],
+        timezone: [this.defaults.location?.timezone || '']
+      })
     });
 
   }
