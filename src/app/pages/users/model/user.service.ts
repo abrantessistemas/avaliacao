@@ -32,7 +32,7 @@ export class UserService {
       .get<any>(`${environment.baseUrl}user/${id}`, this.httpOptions)
       .pipe(
         map((response: any) => {
-          return response.data;
+          return response;
         })
       );
   }
@@ -42,7 +42,7 @@ export class UserService {
       .post<any>(`${environment.baseUrl}user/create`, user, this.httpOptions)
       .pipe(
         map((response: any) => {
-          return response.data;
+          return response;
         })
       );
   }
@@ -51,7 +51,7 @@ export class UserService {
     return this.http
       .put<any>(`${environment.baseUrl}user/${id}`, user, this.httpOptions)
       .pipe(
-        map((response: any) => response.data)
+        map((response: any) => response)
       );
   }
 
