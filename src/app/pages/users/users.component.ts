@@ -16,9 +16,9 @@ import { ConfirmationDialogComponent } from 'src/app/common/dialog/confirmation-
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent {
-  limit = 5;
-  totalItems = 0;
-  pageSizeOptions: number[] = [5, 10, 20, 30, 40, 50];
+  limit!: number;
+  totalItems!: number;
+  pageSizeOptions: number[] = [5, 10, 20];
 
   displayedColumns: string[] = ['picture', 'firstName', 'lastName', 'title', 'actions'];
   dataSource!: any | null;
@@ -108,10 +108,12 @@ export class UsersComponent {
             duration: 5 * 1000,
           });
         });
-        this.findAllUsers(this.pageIndex, this.limit);
       }
+      this.findAllUsers(this.pageIndex, this.limit);
     });
   }
 
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }
