@@ -1,0 +1,87 @@
+<form (ngSubmit)="save()" [formGroup]="userForm">
+  <div mat-dialog-title class="dialog-title">
+    <div class="avatar-container">
+      <img *ngIf="defaults.picture" [src]="defaults.picture" class="avatar" mat-mini-fab matTooltip="Alterar foto">
+      <img *ngIf="!defaults.picture" src="../../../../assets/avatar.png" class="avatar" mat-mini-fab
+        matTooltip="Alterar foto">
+    </div>
+
+    <div class="text-container">
+      <h2 *ngIf="userForm.get('firstName')?.value">
+        {{ userForm.get('firstName')?.value }} {{ userForm.get('lastName')?.value }}
+      </h2>
+      <h2 *ngIf="!userForm.get('firstName')?.value">New User</h2>
+    </div>
+
+    <div class="button-container">
+      <button mat-dialog-close mat-mini-fab color="primary" type="button">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <mat-dialog-content class="dialog-container">
+    <div class="input-fields">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput>
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 8px; width: 100%;">
+        <mat-label>dateOfBirth</mat-label>
+        <input formControlName="dateOfBirth" [matDatepicker]="dateOfBirth" (click)="dateOfBirth.open()"
+          (focus)="dateOfBirth.open()" matInput required readonly>
+        <mat-datepicker-toggle [for]="dateOfBirth" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirth></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="input-fields">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input cdkFocusInitial formControlName="firstName" matInput required>
+        <mat-error *ngIf="!userForm.get('firstName')?.valid">
+          * Preenchimento obrigatório.
+        </mat-error>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field style="margin-left: 8px;">
+        <mat-label>Last Name</mat-label>
+        <input formControlName="lastName" matInput required>
+        <mat-error *ngIf="!userForm.get('lastName')?.valid">
+          * Preenchimento obrigatório.
+        </mat-error>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value=""></mat-option>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="userForm" placeholder="Ex. pat@example.com">
+      <mat-error *ngIf="userForm.hasError('email') && !userForm.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="userForm.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <mat-form-field>
+        <mat-label>phone</mat-label>
+        <input formControlName="phone" matInput>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+</form>
