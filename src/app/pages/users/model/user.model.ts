@@ -1,3 +1,5 @@
+import { LocationModel } from "./location.model";
+
 export class UserModel {
   id!: string;
   firstName!: string;
@@ -9,5 +11,5 @@ export class UserModel {
   registerDate!: string;
   phone!: string;
   picture!: string;
-  location!: {};
+  location!: LocationModel;
 }
