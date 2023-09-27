@@ -15,6 +15,8 @@ import { ConfirmationDialogComponent } from 'src/app/common/dialog/confirmation-
 })
 export class UsersCreateUpdateComponent {
   userForm!: FormGroup;
+  formatPhone!: string;
+
   mode: 'delete' | 'create' | 'update' = 'create';
   listTitle = ['mr', 'ms', 'mrs', 'miss', 'dr'];
   listGender = ['male', 'female', 'other'];
@@ -39,7 +41,7 @@ export class UsersCreateUpdateComponent {
       title: this.defaults.title || '',
       gender: this.defaults.gender || '',
       email: [this.defaults.email, Validators.email] || '',
-      dateOfBirth: this.defaults.dateOfBirth || '',
+      dateOfBirth: [this.defaults.dateOfBirth, Validators.required] || '',
       registerDate: this.defaults.registerDate || '',
       phone: this.defaults.phone || '',
       picture: this.defaults.picture || '',
@@ -51,7 +53,7 @@ export class UsersCreateUpdateComponent {
         timezone: [this.defaults.location?.timezone || '']
       })
     });
-
+    this.formatPhone = this.defaults.phone;
   }
   save() {
     if (this.mode === 'create') {
