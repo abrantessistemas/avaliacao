@@ -24,13 +24,18 @@
   <mat-tab-group [disableRipple]="false">
     <mat-tab label="Description">
       <mat-dialog-content class="dialog-container">
-        <mat-form-field *ngIf="pictureChange" style="width: 100%;">
+        <div>
+          <p style="float: right !important;" *ngIf="mode==='update'">register date:
+            {{userForm.get('registerDate')?.value.substring(0,10)}}</p>
+        </div>
+
+        <mat-form-field *ngIf="pictureChange" class="input-long">
           <mat-label>Picture url</mat-label>
           <input cdkFocusInitial formControlName="picture" matInput>
         </mat-form-field>
 
-        <div class="input-fields">
-          <mat-form-field style="width: 100%;">
+        <div class="container-fields">
+          <mat-form-field>
             <mat-label>Title</mat-label>
             <mat-select formControlName="title">
               <mat-option value=""></mat-option>
@@ -38,8 +43,8 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field style="margin-left: 8px; width: 100%;">
-            <mat-label>dateOfBirth</mat-label>
+          <mat-form-field style="margin-left: 5px;">
+            <mat-label>Date of Birth</mat-label>
             <input formControlName="dateOfBirth" [matDatepicker]="dateOfBirth" (click)="dateOfBirth.open()"
               (focus)="dateOfBirth.open()" matInput required readonly>
             <mat-datepicker-toggle [for]="dateOfBirth" matSuffix></mat-datepicker-toggle>
@@ -47,27 +52,26 @@
           </mat-form-field>
         </div>
 
-        <div class="input-fields">
+        <div class="container-fields">
           <mat-form-field>
             <mat-label>First Name</mat-label>
-            <input cdkFocusInitial formControlName="firstName" matInput required>
+            <input cdkFocusInitial formControlName="firstName" matInput minlength="2" maxlength="50" required>
             <mat-error *ngIf="!userForm.get('firstName')?.valid">
               * Preenchimento obrigatório.
             </mat-error>
             <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           </mat-form-field>
 
-          <mat-form-field style="margin-left: 8px;">
+          <mat-form-field style="margin-left: 5px;">
             <mat-label>Last Name</mat-label>
-            <input formControlName="lastName" matInput required>
+            <input formControlName="lastName" matInput minlength="2" maxlength="50" required>
             <mat-error *ngIf="!userForm.get('lastName')?.valid">
               * Preenchimento obrigatório.
             </mat-error>
-            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
           </mat-form-field>
         </div>
 
-        <mat-form-field style="width: 100%;">
+        <mat-form-field>
           <mat-label>Gender</mat-label>
           <mat-select formControlName="gender">
             <mat-option value=""></mat-option>
@@ -75,7 +79,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field style="width: 100%;">
+        <mat-form-field>
           <mat-label>Email</mat-label>
           <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
           <mat-error *ngIf="userForm.hasError('email')">
@@ -83,35 +87,33 @@
           </mat-error>
         </mat-form-field>
 
-        <div>
-          <mat-form-field>
-            <mat-label>phone</mat-label>
-            <input formControlName="phone" matInput>
-          </mat-form-field>
-        </div>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input formControlName="phone" [ngModel]="formatPhone | formatPhonePipe" matInput>
+        </mat-form-field>
       </mat-dialog-content>
     </mat-tab>
 
     <mat-tab label="Address">
       <mat-dialog-content class="dialog-container" formGroupName="location">
-        <mat-form-field style="width: 100%;">
+        <mat-form-field>
           <mat-label>Street</mat-label>
           <input formControlName="street" matInput>
         </mat-form-field>
 
-        <div class="input-fields">
+        <div class="container-fields">
           <mat-form-field>
             <mat-label>City</mat-label>
             <input formControlName="city" matInput>
           </mat-form-field>
 
-          <mat-form-field style="margin-left: 8px;">
+          <mat-form-field style="margin-left: 5px;">
             <mat-label>State</mat-label>
             <input formControlName="state" matInput>
           </mat-form-field>
         </div>
 
-        <mat-form-field style="width: 100%;">
+        <mat-form-field>
           <mat-label>Country</mat-label>
           <input formControlName="country" matInput>
         </mat-form-field>
